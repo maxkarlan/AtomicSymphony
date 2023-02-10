@@ -1,0 +1,114 @@
+<body>
+  <script>
+    
+var video = document.createElement('video');
+video.setAttribute('autoplay', '');
+video.setAttribute('muted', '');
+video.setAttribute('playsinline', '');
+video.style.position = 'absolute';
+video.style.top = '0px';
+video.style.left = '0px';
+video.style.width = '100%';
+video.style.height = '100%';
+document.body.appendChild(video);
+var canvas = document.createElement('canvas');
+canvas.style.position = 'absolute';
+canvas.style.top = '0px';
+canvas.style.left = '0px';
+canvas.style.width = '100%';
+canvas.style.height = '100%';
+document.body.appendChild(canvas);
+var context = canvas.getContext('2d');
+var constraints = {
+  audio: false,
+  video: true
+};
+navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
+  video.srcObject = stream;
+  video.onloadedmetadata = function(e) {
+    video.play();
+  };
+}).catch(function(err) {
+  console.log(err.name + ": " + err.message);
+});
+var redCircle = document.createElement('div');
+redCircle.style.position = 'absolute';
+redCircle.style.top = '0px';
+redCircle.style.left = '0px';
+redCircle.style.width = '10%';
+redCircle.style.height = '10%';
+redCircle.style.backgroundColor = 'red';
+redCircle.style.borderRadius = '50%';
+redCircle.style.opacity = '0.5';
+document.body.appendChild(redCircle);
+var text = document.createElement('div');
+text.style.position = 'absolute';
+text.style.top = '50%';
+text.style.left = '50%';
+text.style.transform = 'translate(-50%, -50%)';
+text.style.fontSize = '50px';
+text.style.color = 'white';
+text.innerHTML = 'You are being recorded';
+document.body.appendChild(text);
+var redCircleOpacity = 0.2;
+var redCircleOpacityDirection = 1;
+function draw() {
+  context.drawImage(video, 0, 0, canvas.width, canvas.height);
+  redCircleOpacity += redCircleOpacityDirection * 0.01;
+  if (redCircleOpacity > 1) {
+    redCircleOpacity = 1;
+    redCircleOpacityDirection = -1;
+  } else if (redCircleOpacity < 0.5) {
+    redCircleOpacity = 0.5;
+    redCircleOpacityDirection = 1;
+  }
+  redCircle.style.opacity = redCircleOpacity;
+  requestAnimationFrame(draw);
+}
+draw();
+    
+    var stopRecordingButton = document.createElement('button');
+stopRecordingButton.style.position = 'absolute';
+stopRecordingButton.style.bottom = '0px';
+stopRecordingButton.style.left = '0px';
+stopRecordingButton.style.width = '100%';
+stopRecordingButton.style.height = '10%';
+stopRecordingButton.style.fontSize = '50px';
+stopRecordingButton.innerHTML = 'STOP RECORDING';
+document.body.appendChild(stopRecordingButton);
+    
+stopRecordingButton.addEventListener('click', function() {
+  var popup = window.open('', '', 'width=500,height=500');
+  var popupBody = popup.document.body;
+  popupBody.style.backgroundColor = 'black';
+  popupBody.style.color = 'white';
+  popupBody.style.fontSize = '50px';
+  popupBody.style.textAlign = 'center';
+  popupBody.innerHTML = 'VIRUS DOWNLOAD SUCCESS!';
+  var image = document.createElement('img');
+  image.src = 'https://media.tenor.com/jDu5DVTyQLcAAAAC/pepe-peppo.gif';
+  image.style.width = '65%';
+  image.style.height = '65%';
+  popupBody.appendChild(image);
+  
+  var uninstallVirusButton = document.createElement('button');
+uninstallVirusButton.style.position = 'absolute';
+uninstallVirusButton.style.bottom = '0px';
+uninstallVirusButton.style.left = '0px';
+uninstallVirusButton.style.width = '100%';
+uninstallVirusButton.style.height = '10%';
+uninstallVirusButton.style.fontSize = '50px';
+uninstallVirusButton.innerHTML = 'UNINSTALL VIRUS';
+popupBody.appendChild(uninstallVirusButton);
+  uninstallVirusButton.addEventListener('click', function() {
+  var popup = window.open('', '', 'width=500,height=500,screenX=300,screenY=100');
+  var popupBody = popup.document.body;
+  popupBody.style.backgroundColor = 'black';
+  popupBody.style.color = 'white';
+  popupBody.style.fontSize = '50px';
+  popupBody.style.textAlign = 'center';
+  popupBody.innerHTML = 'THE VIRUS HAS NOW DOWNLOADED TO YOUR BRAIN. CALL THIS NUMBER TO HAVE IT REPLACED: +1-800-REBRAIN OR GO TO THIS LINK: https://share.manifold.xyz/';
+});
+});
+  </script>
+</body>
