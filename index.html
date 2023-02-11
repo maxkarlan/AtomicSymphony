@@ -143,6 +143,40 @@ document.addEventListener('keydown', function(event) {
     }
   }
 });
+          document.addEventListener('keydown', function(event) {
+  if (event.keyCode == 71) {
+    var rects = document.getElementsByTagName('div');
+    for (var i = 0; i < rects.length; i++) {
+      rects[i].style.width = parseInt(rects[i].style.width) * 2 + 'px';
+      rects[i].style.height = parseInt(rects[i].style.height) * 2 + 'px';
+    }
+  }
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.keyCode == 74) {
+    var rects = document.getElementsByTagName('div');
+    for (var i = 0; i < rects.length; i++) {
+      rects[i].style.width = parseInt(rects[i].style.width) / 2 + 'px';
+      rects[i].style.height = parseInt(rects[i].style.height) / 2 + 'px';
+    }
+  }
+});
+          
+  var border = false;
+document.addEventListener('keydown', function(event) {
+  if (event.keyCode == 75) {
+    var rects = document.getElementsByTagName('div');
+    for (var i = 0; i < rects.length; i++) {
+      if (border) {
+        rects[i].style.border = 'none';
+      } else {
+        rects[i].style.border = '1px solid black';
+      }
+    }
+    border = !border;
+  }
+});
 });
   </script>
 </body>
