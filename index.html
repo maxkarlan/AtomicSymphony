@@ -2,51 +2,39 @@
   <script>
         document.addEventListener("DOMContentLoaded", function() {
 
-var rectangles = [];
-for (var i = 0; i < 30; i++) {
-  var rectangle = document.createElement('div');
-  rectangle.style.width = Math.floor(Math.random() * 100) + 'px';
-  rectangle.style.height = Math.floor(Math.random() * 100) + 'px';
-  rectangle.style.backgroundColor = 'rgba(' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ',0.5)';
-  rectangle.style.position = 'absolute';
-  rectangle.style.top = Math.floor(Math.random() * window.innerHeight) + 'px';
-  rectangle.style.left = Math.floor(Math.random() * window.innerWidth) + 'px';
-  document.body.appendChild(rectangle);
-  rectangles.push(rectangle);
-}
-
 document.addEventListener('keydown', function(event) {
   if (event.keyCode == 82) {
     for (var i = 0; i < 30; i++) {
-      var rectangle = document.createElement('div');
-      rectangle.style.width = Math.floor(Math.random() * 100) + 'px';
-      rectangle.style.height = Math.floor(Math.random() * 100) + 'px';
-      rectangle.style.backgroundColor = 'rgba(' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ',0.5)';
-      rectangle.style.position = 'absolute';
-      rectangle.style.top = Math.floor(Math.random() * window.innerHeight) + 'px';
-      rectangle.style.left = Math.floor(Math.random() * window.innerWidth) + 'px';
-      document.body.appendChild(rectangle);
-      rectangles.push(rectangle);
+      var rect = document.createElement('div');
+      rect.style.width = Math.random() * 100 + 'px';
+      rect.style.height = Math.random() * 100 + 'px';
+      rect.style.backgroundColor = 'rgba(' + Math.random() * 255 + ',' + Math.random() * 255 + ',' + Math.random() * 255 + ',' + Math.random() + ')';
+      rect.style.position = 'absolute';
+      rect.style.top = Math.random() * window.innerHeight + 'px';
+      rect.style.left = Math.random() * window.innerWidth + 'px';
+      document.body.appendChild(rect);
     }
   }
 });
 
 document.addEventListener('keydown', function(event) {
   if (event.keyCode == 77) {
-    for (var i = 0; i < rectangles.length; i++) {
-      rectangles[i].style.transition = 'all 1s';
-      rectangles[i].style.top = Math.floor(Math.random() * window.innerHeight) + 'px';
-      rectangles[i].style.left = Math.floor(Math.random() * window.innerWidth) + 'px';
+    var rects = document.getElementsByTagName('div');
+    for (var i = 0; i < rects.length; i++) {
+      rects[i].style.transition = 'all 1s';
+      rects[i].style.top = Math.random() * window.innerHeight + 'px';
+      rects[i].style.left = Math.random() * window.innerWidth + 'px';
     }
   }
 });
 
 document.addEventListener('keydown', function(event) {
   if (event.keyCode == 67) {
-    for (var i = 0; i < rectangles.length; i++) {
-      rectangles[i].style.transition = 'all 1s';
-      rectangles[i].style.top = (window.innerHeight / 2) + (Math.sin(i * (2 * Math.PI / rectangles.length)) * (window.innerHeight / 2)) + 'px';
-      rectangles[i].style.left = (window.innerWidth / 2) + (Math.cos(i * (2 * Math.PI / rectangles.length)) * (window.innerWidth / 2)) + 'px';
+    var rects = document.getElementsByTagName('div');
+    for (var i = 0; i < rects.length; i++) {
+      rects[i].style.transition = 'all 1s';
+      rects[i].style.top = window.innerHeight / 2 + Math.sin(i * 2 * Math.PI / rects.length) * window.innerHeight / 2 + 'px';
+      rects[i].style.left = window.innerWidth / 2 + Math.cos(i * 2 * Math.PI / rects.length) * window.innerWidth / 2 + 'px';
     }
   }
 });
@@ -56,63 +44,67 @@ document.addEventListener('keydown', function(event) {
     while (document.body.firstChild) {
       document.body.removeChild(document.body.firstChild);
     }
-    rectangles = [];
-  }
-});
-
-document.addEventListener('keydown', function(event) {
-  if (event.keyCode == 83) {
-    for (var i = 0; i < rectangles.length; i++) {
-      rectangles[i].style.transition = 'all ' + (Math.random() * 1.5 + 0.5) + 's';
-      rectangles[i].style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
-    }
   }
 });
 
 document.addEventListener('keydown', function(event) {
   if (event.keyCode == 79) {
-    rectangles.sort(function(a, b) {
+    var rects = document.getElementsByTagName('div');
+    var rectsArray = [];
+    for (var i = 0; i < rects.length; i++) {
+      rectsArray.push(rects[i]);
+    }
+    rectsArray.sort(function(a, b) {
       return parseInt(a.style.height) - parseInt(b.style.height);
     });
-    for (var i = 0; i < rectangles.length; i++) {
-      rectangles[i].style.transition = 'all 1s';
-      rectangles[i].style.transform = 'rotate(0deg)';
-      rectangles[i].style.top = (Math.floor(i / 10) * 100) + 'px';
-      rectangles[i].style.left = (i % 10 * 100) + 'px';
+    for (var i = 0; i < rectsArray.length; i++) {
+      rectsArray[i].style.transition = 'all 1s';
+      rectsArray[i].style.transform = 'rotate(0deg)';
+      rectsArray[i].style.top = Math.floor(i / 10) * 100 + 'px';
+      rectsArray[i].style.left = i % 10 * 100 + 'px';
     }
   }
 });
 
 document.addEventListener('keydown', function(event) {
   if (event.keyCode == 76) {
-    for (var i = 0; i < rectangles.length; i++) {
-      rectangles[i].style.transition = 'all 1s';
-      rectangles[i].style.transform = 'rotate(0deg)';
-      rectangles[i].style.top = '0px';
-      rectangles[i].style.left = (i * (window.innerWidth / rectangles.length)) + 'px';
-      rectangles[i].style.width = (window.innerWidth / rectangles.length) + 'px';
-      rectangles[i].style.height = window.innerHeight + 'px';
+    var rects = document.getElementsByTagName('div');
+    for (var i = 0; i < rects.length; i++) {
+      rects[i].style.transition = 'all 1s';
+      rects[i].style.transform = 'rotate(0deg)';
+      rects[i].style.top = '0px';
+      rects[i].style.left = i * window.innerWidth / rects.length + 'px';
+      rects[i].style.width = window.innerWidth / rects.length + 'px';
+      rects[i].style.height = window.innerHeight + 'px';
     }
   }
 });
 
-var backgroundColor = 'white';
 document.addEventListener('keydown', function(event) {
   if (event.keyCode == 66) {
-    if (backgroundColor == 'white') {
+    if (document.body.style.backgroundColor == 'white') {
       document.body.style.backgroundColor = 'black';
-      backgroundColor = 'black';
     } else {
       document.body.style.backgroundColor = 'white';
-      backgroundColor = 'white';
     }
   }
 });
 
 document.addEventListener('keydown', function(event) {
   if (event.keyCode == 68) {
+    var rects = document.getElementsByTagName('div');
     for (var i = 0; i < 30; i++) {
-      document.body.removeChild(rectangles.pop());
+      document.body.removeChild(rects[i]);
+    }
+  }
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.keyCode == 83) {
+    var rects = document.getElementsByTagName('div');
+    for (var i = 0; i < rects.length; i++) {
+      rects[i].style.transition = 'all 1s';
+      rects[i].style.transform = 'rotate(' + Math.random() * 270 + 'deg)';
     }
   }
 });
