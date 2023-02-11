@@ -108,6 +108,14 @@ document.addEventListener('keydown', function(event) {
     }
   }
 });
+
+document.addEventListener('keydown', function(event) {
+  if (event.keyCode == 68) {
+    for (var i = 0; i < 30; i++) {
+      document.body.removeChild(rectangles.pop());
+    }
+  }
+});
 });
   </script>
 </body>
