@@ -129,6 +129,20 @@ document.addEventListener('keydown', function(event) {
     }
   }
 });
+          document.addEventListener('click', function(event) {
+  var rects = document.getElementsByTagName('div');
+  for (var i = 0; i < rects.length; i++) {
+    var rect = rects[i];
+    var rectX = parseInt(rect.style.left);
+    var rectY = parseInt(rect.style.top);
+    var distance = Math.sqrt(Math.pow(event.clientX - rectX, 2) + Math.pow(event.clientY - rectY, 2));
+    if (distance < 200) {
+      rect.style.transition = 'all 1s';
+      rect.style.top = rectY + (rectY - event.clientY) * 0.7 + 'px';
+      rect.style.left = rectX + (rectX - event.clientX) * 0.7 + 'px';
+    }
+  }
+});
 });
   </script>
 </body>
