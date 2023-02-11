@@ -1,6 +1,6 @@
 <body>
   <script>
-        document.addEventListener("DOMContentLoaded", function() {
+       document.addEventListener("DOMContentLoaded", function() {
 
 var rectangles = [];
 for (var i = 0; i < 30; i++) {
@@ -17,7 +17,7 @@ for (var i = 0; i < 30; i++) {
 
 document.addEventListener('keydown', function(event) {
   if (event.keyCode == 82) {
-    for (var i = 0; i < 15; i++) {
+    for (var i = 0; i < 30; i++) {
       var rectangle = document.createElement('div');
       rectangle.style.width = Math.floor(Math.random() * 100) + 'px';
       rectangle.style.height = Math.floor(Math.random() * 100) + 'px';
@@ -42,9 +42,43 @@ document.addEventListener('keydown', function(event) {
 });
 
 document.addEventListener('keydown', function(event) {
+  if (event.keyCode == 67) {
+    for (var i = 0; i < rectangles.length; i++) {
+      rectangles[i].style.transition = 'all 1s';
+      rectangles[i].style.top = (window.innerHeight / 2) + (Math.sin(i * (2 * Math.PI / rectangles.length)) * (window.innerHeight / 2)) + 'px';
+      rectangles[i].style.left = (window.innerWidth / 2) + (Math.cos(i * (2 * Math.PI / rectangles.length)) * (window.innerWidth / 2)) + 'px';
+    }
+  }
+});
+
+document.addEventListener('keydown', function(event) {
   if (event.keyCode == 32) {
     while (document.body.firstChild) {
       document.body.removeChild(document.body.firstChild);
+    }
+    rectangles = [];
+  }
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.keyCode == 83) {
+    for (var i = 0; i < rectangles.length; i++) {
+      rectangles[i].style.transition = 'all ' + (Math.random() * 1.5 + 0.5) + 's';
+      rectangles[i].style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
+    }
+  }
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.keyCode == 79) {
+    rectangles.sort(function(a, b) {
+      return parseInt(a.style.height) - parseInt(b.style.height);
+    });
+    for (var i = 0; i < rectangles.length; i++) {
+      rectangles[i].style.transition = 'all 1s';
+      rectangles[i].style.transform = 'rotate(0deg)';
+      rectangles[i].style.top = (Math.floor(i / 10) * 100) + 'px';
+      rectangles[i].style.left = (i % 10 * 100) + 'px';
     }
   }
 });
