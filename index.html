@@ -1,6 +1,6 @@
 <body>
   <script>
-       document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function() {
 
 var rectangles = [];
 for (var i = 0; i < 30; i++) {
@@ -79,6 +79,18 @@ document.addEventListener('keydown', function(event) {
       rectangles[i].style.transform = 'rotate(0deg)';
       rectangles[i].style.top = (Math.floor(i / 10) * 100) + 'px';
       rectangles[i].style.left = (i % 10 * 100) + 'px';
+    }
+  }
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.keyCode == 76) {
+    for (var i = 0; i < rectangles.length; i++) {
+      rectangles[i].style.transition = 'all 1s';
+      rectangles[i].style.top = '0px';
+      rectangles[i].style.left = (i * (window.innerWidth / rectangles.length)) + 'px';
+      rectangles[i].style.width = (window.innerWidth / rectangles.length) + 'px';
+      rectangles[i].style.height = window.innerHeight + 'px';
     }
   }
 });
