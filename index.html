@@ -2,16 +2,30 @@
   <script>
         document.addEventListener("DOMContentLoaded", function() {
 
+var pressR = document.createElement('div');
+pressR.innerHTML = 'Press "R" on your keyboard to begin!';
+pressR.style.position = 'absolute';
+pressR.style.top = '50%';
+pressR.style.left = '50%';
+pressR.style.transform = 'translate(-50%, -50%)';
+document.body.appendChild(pressR);
+
+document.addEventListener('keydown', function(event) {
+  if (event.keyCode == 82) {
+    document.body.removeChild(pressR);
+  }
+});
+
 document.addEventListener('keydown', function(event) {
   if (event.keyCode == 82) {
     for (var i = 0; i < 30; i++) {
       var rect = document.createElement('div');
+      rect.style.position = 'absolute';
+      rect.style.top = Math.random() * (window.innerHeight - 100) + 'px';
+      rect.style.left = Math.random() * (window.innerWidth - 100) + 'px';
       rect.style.width = Math.random() * 100 + 'px';
       rect.style.height = Math.random() * 100 + 'px';
-      rect.style.backgroundColor = 'rgba(' + Math.random() * 255 + ',' + Math.random() * 255 + ',' + Math.random() * 255 + ',' + Math.random() + ')';
-      rect.style.position = 'absolute';
-      rect.style.top = Math.random() * window.innerHeight + 'px';
-      rect.style.left = Math.random() * window.innerWidth + 'px';
+      rect.style.backgroundColor = 'rgba(' + Math.random() * 255 + ', ' + Math.random() * 255 + ', ' + Math.random() * 255 + ', ' + Math.random() + ')';
       document.body.appendChild(rect);
     }
   }
@@ -22,8 +36,8 @@ document.addEventListener('keydown', function(event) {
     var rects = document.getElementsByTagName('div');
     for (var i = 0; i < rects.length; i++) {
       rects[i].style.transition = 'all 1s';
-      rects[i].style.top = Math.random() * window.innerHeight + 'px';
-      rects[i].style.left = Math.random() * window.innerWidth + 'px';
+      rects[i].style.top = Math.random() * (window.innerHeight - 100) + 'px';
+      rects[i].style.left = Math.random() * (window.innerWidth - 100) + 'px';
     }
   }
 });
@@ -33,8 +47,8 @@ document.addEventListener('keydown', function(event) {
     var rects = document.getElementsByTagName('div');
     for (var i = 0; i < rects.length; i++) {
       rects[i].style.transition = 'all 1s';
-      rects[i].style.top = window.innerHeight / 2 + Math.sin(i * 2 * Math.PI / rects.length) * window.innerHeight / 2 + 'px';
-      rects[i].style.left = window.innerWidth / 2 + Math.cos(i * 2 * Math.PI / rects.length) * window.innerWidth / 2 + 'px';
+      rects[i].style.top = (window.innerHeight / 2) + (Math.sin(i * (2 * Math.PI / rects.length)) * (window.innerHeight / 2)) + 'px';
+      rects[i].style.left = (window.innerWidth / 2) + (Math.cos(i * (2 * Math.PI / rects.length)) * (window.innerWidth / 2)) + 'px';
     }
   }
 });
@@ -44,48 +58,26 @@ document.addEventListener('keydown', function(event) {
     while (document.body.firstChild) {
       document.body.removeChild(document.body.firstChild);
     }
+    document.body.appendChild(pressR);
   }
 });
 
 document.addEventListener('keydown', function(event) {
-  if (event.keyCode == 79) {
-    var rects = document.getElementsByTagName('div');
-    var rectsArray = [];
-    for (var i = 0; i < rects.length; i++) {
-      rectsArray.push(rects[i]);
-    }
-    rectsArray.sort(function(a, b) {
-      return parseInt(a.style.height) - parseInt(b.style.height);
-    });
-    for (var i = 0; i < rectsArray.length; i++) {
-      rectsArray[i].style.transition = 'all 1s';
-      rectsArray[i].style.transform = 'rotate(0deg)';
-      rectsArray[i].style.top = Math.floor(i / 10) * 100 + 'px';
-      rectsArray[i].style.left = i % 10 * 100 + 'px';
-    }
-  }
-});
-
-document.addEventListener('keydown', function(event) {
-  if (event.keyCode == 76) {
+  if (event.keyCode == 83) {
     var rects = document.getElementsByTagName('div');
     for (var i = 0; i < rects.length; i++) {
       rects[i].style.transition = 'all 1s';
-      rects[i].style.transform = 'rotate(0deg)';
-      rects[i].style.top = '0px';
-      rects[i].style.left = i * window.innerWidth / rects.length + 'px';
-      rects[i].style.width = window.innerWidth / rects.length + 'px';
-      rects[i].style.height = window.innerHeight + 'px';
+      rects[i].style.transform = 'rotate(' + (Math.random() * 270 + 45) + 'deg)';
     }
   }
 });
 
 document.addEventListener('keydown', function(event) {
   if (event.keyCode == 66) {
-    if (document.body.style.backgroundColor == 'white') {
-      document.body.style.backgroundColor = 'black';
-    } else {
+    if (document.body.style.backgroundColor == 'black') {
       document.body.style.backgroundColor = 'white';
+    } else {
+      document.body.style.backgroundColor = 'black';
     }
   }
 });
@@ -100,11 +92,40 @@ document.addEventListener('keydown', function(event) {
 });
 
 document.addEventListener('keydown', function(event) {
-  if (event.keyCode == 83) {
+  if (event.keyCode == 72) {
     var rects = document.getElementsByTagName('div');
     for (var i = 0; i < rects.length; i++) {
       rects[i].style.transition = 'all 1s';
-      rects[i].style.transform = 'rotate(' + Math.random() * 270 + 'deg)';
+      rects[i].style.transform = 'rotate(0deg)';
+      rects[i].style.top = (i * (window.innerHeight / rects.length)) + 'px';
+      rects[i].style.left = '0px';
+      rects[i].style.width = window.innerWidth + 'px';
+      rects[i].style.height = (window.innerHeight / rects.length) + 'px';
+    }
+  }
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.keyCode == 80) {
+    var rects = document.getElementsByTagName('div');
+    for (var i = 0; i < rects.length; i++) {
+      rects[i].style.transition = 'all 1s';
+      rects[i].style.width = Math.random() * 100 + 'px';
+      rects[i].style.height = Math.random() * 100 + 'px';
+    }
+  }
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.keyCode == 86) {
+    var rects = document.getElementsByTagName('div');
+    for (var i = 0; i < rects.length; i++) {
+      rects[i].style.transition = 'all 1s';
+      rects[i].style.transform = 'rotate(0deg)';
+      rects[i].style.top = '0px';
+      rects[i].style.left = (i * (window.innerWidth / rects.length)) + 'px';
+      rects[i].style.width = (window.innerWidth / rects.length) + 'px';
+      rects[i].style.height = window.innerHeight + 'px';
     }
   }
 });
