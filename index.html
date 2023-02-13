@@ -30,6 +30,7 @@ document.addEventListener('keydown', function(event) {
     }
   }
 });
+          
 
 document.addEventListener('keydown', function(event) {
   if (event.keyCode == 77) {
@@ -177,6 +178,25 @@ document.addEventListener('keydown', function(event) {
     border = !border;
   }
 });
+   document.addEventListener('keydown', function(event) {
+  if (event.keyCode == 79) {
+    var rects = document.getElementsByTagName('div');
+    for (var i = 0; i < rects.length; i++) {
+      rects[i].style.transition = 'all 1s';
+      rects[i].style.borderRadius = '50%';
+    }
+  }
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.keyCode == 84) {
+    var rects = document.getElementsByTagName('div');
+    for (var i = 0; i < rects.length; i++) {
+      rects[i].style.transition = 'all 1s';
+      rects[i].style.borderRadius = '0%';
+    }
+  }
+});       
 });
   </script>
 </body>
