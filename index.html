@@ -48,8 +48,8 @@ document.addEventListener('keydown', function(event) {
     var rects = document.getElementsByTagName('div');
     for (var i = 0; i < rects.length; i++) {
       rects[i].style.transition = 'all 1s';
-      rects[i].style.top = (window.innerHeight / 2) + (Math.sin(i * (2 * Math.PI / rects.length)) * (window.innerHeight / 2)) + 'px';
-      rects[i].style.left = (window.innerWidth / 2) + (Math.cos(i * (2 * Math.PI / rects.length)) * (window.innerWidth / 2)) + 'px';
+      rects[i].style.top = (window.innerHeight / 2 - rects[i].offsetHeight / 2) + 420 * Math.sin(i * 2 * Math.PI / rects.length) + 'px';
+      rects[i].style.left = (window.innerWidth / 2 - rects[i].offsetWidth / 2) + 420 * Math.cos(i * 2 * Math.PI / rects.length) + 'px';
     }
   }
 });
