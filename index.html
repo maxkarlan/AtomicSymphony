@@ -1,9 +1,22 @@
 <body>
   <script>
         document.addEventListener("DOMContentLoaded", function() {
+          
+var popUp = null;
+document.addEventListener('keydown', function(event) {
+  if (event.keyCode == 73) {
+    if (popUp == null) {
+      popUp = window.open('', '', 'width=200,height=200,top=' + (window.innerHeight / 2 - 100) + ',left=' + (window.innerWidth / 2 - 100));
+      popUp.document.body.innerHTML = 'Atomic Symphony Controls<ul><li>Press "R" to add more rectangles.</li><li>Press "O" to convert rectangles to ovals.</li><li>Press "T" to convert ovals to rectangles.</li><li>Press "D" to delete some shapes.</li><li>Press "M" to move the shapes.</li><li>Press "P" to randomly resize all of the shapes.</li><li>Press "G" to double the size of all the shapes.</li><li>Press "J" to half the size of all the shapes.</li><li>Press "S" to spin the shapes.</li><li>Press "K" to toggle a black border around all the shapes.</li><li>Press "C" to make the shapes form a ring.</li><li>Press "V" to vertically line up the shapes.</li><li>Press "H" to horizontally line up the shapes.</li><li>Press "B" to toggle the background color between black and white.</li><li>Left click in the window to repel all shapes within a 200px radius.</li><li>Press spacebar to reset the screen.</li></ul>';
+    } else {
+      popUp.close();
+      popUp = null;
+    }
+  }
+});
 
 var pressR = document.createElement('div');
-pressR.innerHTML = 'Press "R" on your keyboard to begin!';
+pressR.innerHTML = 'Press "I" on your keyboard to read the controls';
 pressR.style.position = 'absolute';
 pressR.style.top = '50%';
 pressR.style.left = '50%';
@@ -196,7 +209,7 @@ document.addEventListener('keydown', function(event) {
       rects[i].style.borderRadius = '0%';
     }
   }
-});       
+});
 });
   </script>
 </body>
