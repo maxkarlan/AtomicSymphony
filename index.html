@@ -1,15 +1,16 @@
 <body>
   <script>
+    
         document.addEventListener("DOMContentLoaded", function() {
-          
-var instructions = ['Press "I" to toggle instructions window', 'Press "R" to add more rectangles.', 'Press "O" to convert rectangles to ovals.', 'Press "T" to convert ovals to rectangles.', 'Press "D" to delete shapes.', 'Press "M" to move the shapes.', 'Press "P" to randomly resize all of the shapes.', 'Press "G" to double the size of all the shapes.', 'Press "J" to half the size of all the shapes.', 'Press "S" to spin the shapes.', 'Press "K" to toggle a black border around all the shapes.', 'Press "C" to make the shapes form a ring.', 'Press "V" to vertically line up the shapes.', 'Press "H" to horizontally line up the shapes.', 'Press "B" to toggle the background color between black and white.', 'Left click in the window to repel all shapes within a 200px radius.', 'Press spacebar to reset the screen.'];
-var instructionsList = document.createElement('ul');
-for (var i = 0; i < instructions.length; i++) {
-  var letter = document.createElement('li');
+
+          let instructions = ['Press "I" to toggle instructions window', 'Press "R" to add more rectangles.', 'Press "O" to convert rectangles to ovals.', 'Press "T" to convert ovals to rectangles.', 'Press "D" to delete shapes.', 'Press "M" to move the shapes.', 'Press "P" to randomly resize all of the shapes.', 'Press "G" to double the size of all the shapes.', 'Press "J" to half the size of all the shapes.', 'Press "S" to spin the shapes.', 'Press "K" to toggle a black border around all the shapes.', 'Press "C" to make the shapes form a ring.', 'Press "V" to vertically line up the shapes.', 'Press "H" to horizontally line up the shapes.', 'Press "B" to toggle the background color between black and white.', 'Left click in the window to repel all shapes within a 200px radius.', 'Press spacebar to reset the screen.'];
+let instructionsList = document.createElement('ul');
+for (let i = 0; i < instructions.length; i++) {
+  let letter = document.createElement('li');
   letter.innerHTML = instructions[i];
   instructionsList.appendChild(letter);
 }
-var instructionsBox = document.createElement('div');
+let instructionsBox = document.createElement('div');
 instructionsBox.style.width = '500px';
 instructionsBox.style.height = '350px';
 instructionsBox.style.backgroundColor = 'white';
@@ -20,37 +21,34 @@ instructionsBox.style.marginTop = '-50px';
 instructionsBox.style.marginLeft = '-50px';
 instructionsBox.style.border = '2px solid black';
 instructionsBox.appendChild(instructionsList);
-var instructionsBoxShowing = false;
+document.body.appendChild(instructionsBox);
+let instructionsBoxShowing = true;
 document.addEventListener('keydown', function(event) {
-  if (event.keyCode == 73) {
+  if (event.keyCode === 73) {
     if (instructionsBoxShowing) {
       document.body.removeChild(instructionsBox);
       instructionsBoxShowing = false;
     } else {
-      document.body.appendChild(instructionsBox);
+instructionsBox.style.width = '500px';
+instructionsBox.style.height = '350px';
+instructionsBox.style.backgroundColor = 'white';
+instructionsBox.style.position = 'absolute';
+instructionsBox.style.top = '40%';
+instructionsBox.style.left = '40%';
+instructionsBox.style.marginTop = '-50px';
+instructionsBox.style.marginLeft = '-50px';
+instructionsBox.style.border = '2px solid black';
+instructionsBox.appendChild(instructionsList);
+document.body.appendChild(instructionsBox);
       instructionsBoxShowing = true;
     }
   }
 });
-
-var pressR = document.createElement('div');
-pressR.innerHTML = 'Press "I" on your keyboard to read the controls';
-pressR.style.position = 'absolute';
-pressR.style.top = '50%';
-pressR.style.left = '50%';
-pressR.style.transform = 'translate(-50%, -50%)';
-document.body.appendChild(pressR);
-
+          
 document.addEventListener('keydown', function(event) {
-  if (event.keyCode == 82) {
-    document.body.removeChild(pressR);
-  }
-});
-
-document.addEventListener('keydown', function(event) {
-  if (event.keyCode == 82) {
-    for (var i = 0; i < 30; i++) {
-      var rect = document.createElement('div');
+  if (event.keyCode === 82) {
+    for (let i = 0; i < 30; i++) {
+      let rect = document.createElement('div');
       rect.style.position = 'absolute';
       rect.style.top = Math.random() * (window.innerHeight - 100) + 'px';
       rect.style.left = Math.random() * (window.innerWidth - 100) + 'px';
@@ -64,9 +62,9 @@ document.addEventListener('keydown', function(event) {
           
 
 document.addEventListener('keydown', function(event) {
-  if (event.keyCode == 77) {
-    var rects = document.getElementsByTagName('div');
-    for (var i = 0; i < rects.length; i++) {
+  if (event.keyCode === 77) {
+    let rects = document.getElementsByTagName('div');
+    for (let i = 0; i < rects.length; i++) {
       rects[i].style.transition = 'all 1s';
       rects[i].style.top = Math.random() * (window.innerHeight - 100) + 'px';
       rects[i].style.left = Math.random() * (window.innerWidth - 100) + 'px';
@@ -75,9 +73,9 @@ document.addEventListener('keydown', function(event) {
 });
 
 document.addEventListener('keydown', function(event) {
-  if (event.keyCode == 67) {
-    var rects = document.getElementsByTagName('div');
-    for (var i = 0; i < rects.length; i++) {
+  if (event.keyCode === 67) {
+    let rects = document.getElementsByTagName('div');
+    for (let i = 0; i < rects.length; i++) {
       rects[i].style.transition = 'all 1s';
       rects[i].style.top = (window.innerHeight / 2 - rects[i].offsetHeight / 2) + 420 * Math.sin(i * 2 * Math.PI / rects.length) + 'px';
       rects[i].style.left = (window.innerWidth / 2 - rects[i].offsetWidth / 2) + 420 * Math.cos(i * 2 * Math.PI / rects.length) + 'px';
@@ -86,18 +84,9 @@ document.addEventListener('keydown', function(event) {
 });
 
 document.addEventListener('keydown', function(event) {
-  if (event.keyCode == 32) {
-    while (document.body.firstChild) {
-      document.body.removeChild(document.body.firstChild);
-    }
-    document.body.appendChild(pressR);
-  }
-});
-
-document.addEventListener('keydown', function(event) {
-  if (event.keyCode == 83) {
-    var rects = document.getElementsByTagName('div');
-    for (var i = 0; i < rects.length; i++) {
+  if (event.keyCode === 83) {
+    let rects = document.getElementsByTagName('div');
+    for (let i = 0; i < rects.length; i++) {
       rects[i].style.transition = 'all 1s';
       rects[i].style.transform = 'rotate(' + (Math.random() * 270 + 45) + 'deg)';
     }
@@ -105,8 +94,8 @@ document.addEventListener('keydown', function(event) {
 });
 
 document.addEventListener('keydown', function(event) {
-  if (event.keyCode == 66) {
-    if (document.body.style.backgroundColor == 'black') {
+  if (event.keyCode === 66) {
+    if (document.body.style.backgroundColor === 'black') {
       document.body.style.backgroundColor = 'white';
     } else {
       document.body.style.backgroundColor = 'black';
@@ -115,18 +104,18 @@ document.addEventListener('keydown', function(event) {
 });
 
 document.addEventListener('keydown', function(event) {
-  if (event.keyCode == 68) {
-    var rects = document.getElementsByTagName('div');
-    for (var i = 0; i < 30; i++) {
+  if (event.keyCode === 68) {
+    let rects = document.getElementsByTagName('div');
+    for (let i = 0; i < 30; i++) {
       document.body.removeChild(rects[i]);
     }
   }
 });
 
 document.addEventListener('keydown', function(event) {
-  if (event.keyCode == 72) {
-    var rects = document.getElementsByTagName('div');
-    for (var i = 0; i < rects.length; i++) {
+  if (event.keyCode === 72) {
+    let rects = document.getElementsByTagName('div');
+    for (let i = 0; i < rects.length; i++) {
       rects[i].style.transition = 'all 1s';
       rects[i].style.transform = 'rotate(0deg)';
       rects[i].style.top = (i * (window.innerHeight / rects.length)) + 'px';
@@ -138,9 +127,9 @@ document.addEventListener('keydown', function(event) {
 });
 
 document.addEventListener('keydown', function(event) {
-  if (event.keyCode == 80) {
-    var rects = document.getElementsByTagName('div');
-    for (var i = 0; i < rects.length; i++) {
+  if (event.keyCode === 80) {
+    let rects = document.getElementsByTagName('div');
+    for (let i = 0; i < rects.length; i++) {
       rects[i].style.transition = 'all 1s';
       rects[i].style.width = Math.random() * 100 + 'px';
       rects[i].style.height = Math.random() * 100 + 'px';
@@ -149,9 +138,9 @@ document.addEventListener('keydown', function(event) {
 });
 
 document.addEventListener('keydown', function(event) {
-  if (event.keyCode == 86) {
-    var rects = document.getElementsByTagName('div');
-    for (var i = 0; i < rects.length; i++) {
+  if (event.keyCode === 86) {
+    let rects = document.getElementsByTagName('div');
+    for (let i = 0; i < rects.length; i++) {
       rects[i].style.transition = 'all 1s';
       rects[i].style.transform = 'rotate(0deg)';
       rects[i].style.top = '0px';
@@ -162,12 +151,12 @@ document.addEventListener('keydown', function(event) {
   }
 });
           document.addEventListener('click', function(event) {
-  var rects = document.getElementsByTagName('div');
-  for (var i = 0; i < rects.length; i++) {
-    var rect = rects[i];
-    var rectX = parseInt(rect.style.left);
-    var rectY = parseInt(rect.style.top);
-    var distance = Math.sqrt(Math.pow(event.clientX - rectX, 2) + Math.pow(event.clientY - rectY, 2));
+  let rects = document.getElementsByTagName('div');
+  for (let i = 0; i < rects.length; i++) {
+    let rect = rects[i];
+    let rectX = parseInt(rect.style.left);
+    let rectY = parseInt(rect.style.top);
+    let distance = Math.sqrt(Math.pow(event.clientX - rectX, 2) + Math.pow(event.clientY - rectY, 2));
     if (distance < 200) {
       rect.style.transition = 'all 1s';
       rect.style.top = rectY + (rectY - event.clientY) * 0.7 + 'px';
@@ -176,9 +165,9 @@ document.addEventListener('keydown', function(event) {
   }
 });
           document.addEventListener('keydown', function(event) {
-  if (event.keyCode == 71) {
-    var rects = document.getElementsByTagName('div');
-    for (var i = 0; i < rects.length; i++) {
+  if (event.keyCode === 71) {
+    let rects = document.getElementsByTagName('div');
+    for (let i = 0; i < rects.length; i++) {
       rects[i].style.width = parseInt(rects[i].style.width) * 2 + 'px';
       rects[i].style.height = parseInt(rects[i].style.height) * 2 + 'px';
     }
@@ -186,20 +175,20 @@ document.addEventListener('keydown', function(event) {
 });
 
 document.addEventListener('keydown', function(event) {
-  if (event.keyCode == 74) {
-    var rects = document.getElementsByTagName('div');
-    for (var i = 0; i < rects.length; i++) {
+  if (event.keyCode === 74) {
+    let rects = document.getElementsByTagName('div');
+    for (let i = 0; i < rects.length; i++) {
       rects[i].style.width = parseInt(rects[i].style.width) / 2 + 'px';
       rects[i].style.height = parseInt(rects[i].style.height) / 2 + 'px';
     }
   }
 });
           
-  var border = false;
+  let border = false;
 document.addEventListener('keydown', function(event) {
-  if (event.keyCode == 75) {
-    var rects = document.getElementsByTagName('div');
-    for (var i = 0; i < rects.length; i++) {
+  if (event.keyCode === 75) {
+    let rects = document.getElementsByTagName('div');
+    for (let i = 0; i < rects.length; i++) {
       if (border) {
         rects[i].style.border = 'none';
       } else {
@@ -210,9 +199,9 @@ document.addEventListener('keydown', function(event) {
   }
 });
    document.addEventListener('keydown', function(event) {
-  if (event.keyCode == 79) {
-    var rects = document.getElementsByTagName('div');
-    for (var i = 0; i < rects.length; i++) {
+  if (event.keyCode === 79) {
+    let rects = document.getElementsByTagName('div');
+    for (let i = 0; i < rects.length; i++) {
       rects[i].style.transition = 'all 1s';
       rects[i].style.borderRadius = '50%';
     }
@@ -220,12 +209,21 @@ document.addEventListener('keydown', function(event) {
 });
 
 document.addEventListener('keydown', function(event) {
-  if (event.keyCode == 84) {
-    var rects = document.getElementsByTagName('div');
-    for (var i = 0; i < rects.length; i++) {
+  if (event.keyCode === 84) {
+    let rects = document.getElementsByTagName('div');
+    for (let i = 0; i < rects.length; i++) {
       rects[i].style.transition = 'all 1s';
       rects[i].style.borderRadius = '0%';
     }
+  }
+});
+          
+document.addEventListener('keydown', function(event) {
+  if (event.keyCode === 32) {
+    while (document.body.firstChild) {
+      document.body.removeChild(document.body.firstChild);
+    }
+    document.body.appendChild(instructionsBox);
   }
 });
 });
