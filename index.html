@@ -2,15 +2,33 @@
   <script>
         document.addEventListener("DOMContentLoaded", function() {
           
-var popUp = null;
+var instructions = ['Press "I" to toggle instructions window', 'Press "R" to add more rectangles.', 'Press "O" to convert rectangles to ovals.', 'Press "T" to convert ovals to rectangles.', 'Press "D" to delete shapes.', 'Press "M" to move the shapes.', 'Press "P" to randomly resize all of the shapes.', 'Press "G" to double the size of all the shapes.', 'Press "J" to half the size of all the shapes.', 'Press "S" to spin the shapes.', 'Press "K" to toggle a black border around all the shapes.', 'Press "C" to make the shapes form a ring.', 'Press "V" to vertically line up the shapes.', 'Press "H" to horizontally line up the shapes.', 'Press "B" to toggle the background color between black and white.', 'Left click in the window to repel all shapes within a 200px radius.', 'Press spacebar to reset the screen.'];
+var instructionsList = document.createElement('ul');
+for (var i = 0; i < instructions.length; i++) {
+  var letter = document.createElement('li');
+  letter.innerHTML = instructions[i];
+  instructionsList.appendChild(letter);
+}
+var instructionsBox = document.createElement('div');
+instructionsBox.style.width = '500px';
+instructionsBox.style.height = '350px';
+instructionsBox.style.backgroundColor = 'white';
+instructionsBox.style.position = 'absolute';
+instructionsBox.style.top = '40%';
+instructionsBox.style.left = '40%';
+instructionsBox.style.marginTop = '-50px';
+instructionsBox.style.marginLeft = '-50px';
+instructionsBox.style.border = '2px solid black';
+instructionsBox.appendChild(instructionsList);
+var instructionsBoxShowing = false;
 document.addEventListener('keydown', function(event) {
   if (event.keyCode == 73) {
-    if (popUp == null) {
-      popUp = window.open('', '', 'width=200,height=200,top=' + (window.innerHeight / 2 - 100) + ',left=' + (window.innerWidth / 2 - 100));
-      popUp.document.body.innerHTML = 'Atomic Symphony Controls<ul><li>Press "R" to add more rectangles.</li><li>Press "O" to convert rectangles to ovals.</li><li>Press "T" to convert ovals to rectangles.</li><li>Press "D" to delete some shapes.</li><li>Press "M" to move the shapes.</li><li>Press "P" to randomly resize all of the shapes.</li><li>Press "G" to double the size of all the shapes.</li><li>Press "J" to half the size of all the shapes.</li><li>Press "S" to spin the shapes.</li><li>Press "K" to toggle a black border around all the shapes.</li><li>Press "C" to make the shapes form a ring.</li><li>Press "V" to vertically line up the shapes.</li><li>Press "H" to horizontally line up the shapes.</li><li>Press "B" to toggle the background color between black and white.</li><li>Left click in the window to repel all shapes within a 200px radius.</li><li>Press spacebar to reset the screen.</li></ul>';
+    if (instructionsBoxShowing) {
+      document.body.removeChild(instructionsBox);
+      instructionsBoxShowing = false;
     } else {
-      popUp.close();
-      popUp = null;
+      document.body.appendChild(instructionsBox);
+      instructionsBoxShowing = true;
     }
   }
 });
